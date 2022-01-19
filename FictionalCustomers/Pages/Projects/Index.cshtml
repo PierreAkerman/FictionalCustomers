@@ -1,0 +1,112 @@
+﻿@page
+@model FictionalCustomers.Pages.Projects.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Project
+            </th>
+            <th>
+                Owner
+            </th>
+            <th>
+                Required Skill
+            </th>
+            <th>
+                Developer/s
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Location)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Project) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @if(item.Clients.Count() == 1)
+                {
+                    @item.Clients.First().CompanyName;
+                }
+                else
+                {
+                    @foreach(var Client in item.Clients)
+                    {
+                        if (Client != item.Clients.Last())
+                        {
+                            @(Client.CompanyName + ", ")
+                        }
+                        else
+                        {
+                            @Client.CompanyName
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReqSkillLevel)
+            </td>
+            <td>
+                @if(item.Employees.Count() == 1)
+                {
+                    @item.Employees.First().FullName
+                }
+                else
+                {
+                    @foreach(var Employee in item.Employees)
+                    {
+                        if (Employee != item.Employees.Last())
+                        {
+                            @(Employee.FullName + ", ")
+                        }
+                        else
+                        {
+                            @Employee.FullName
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @item.StartDate.ToShortDateString()
+            </td>
+            <td>
+                @item.EndDate.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgressStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

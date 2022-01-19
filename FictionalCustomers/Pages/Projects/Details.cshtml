@@ -1,0 +1,107 @@
+﻿@page
+@model FictionalCustomers.Pages.Projects.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>@Model.Project.ProjectName</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Project 
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.ProjectName)
+        </dd>
+        <dt class="col-sm-2">
+            Owner
+        </dt>
+        <dd class="col-sm-10">
+            @if(Model.Project.Clients.Count() == 1)
+                {
+                    @Model.Project.Clients.First().CompanyName
+                }
+            else
+                {
+                    @foreach(var Client in Model.Project.Clients)
+                    {
+                     if (Client != Model.Project.Clients.Last())
+                        {
+                            @(Client.CompanyName + ", ")
+                        }
+                     else
+                        {
+                            @Client.CompanyName
+                        }
+                    }
+                }
+        </dd>
+        <dt class="col-sm-2">
+            Required Skill Level
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.ReqSkillLevel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.Description)
+        </dd>
+        <dt class="col-sm-2">
+            Developer/s
+        </dt>
+        <dd class="col-sm-10">
+                    @if(Model.Project.Employees.Count() == 1)
+                {
+                    @Model.Project.Employees.First().FullName
+                }
+            else
+                {
+                    @foreach(var Employee in Model.Project.Employees)
+                    {
+                     if (Employee != Model.Project.Employees.Last())
+                        {
+                            @(Employee.FullName + ", ")
+                        }
+                     else
+                        {
+                            @Employee.FullName
+                        }
+                    }
+                }
+        </dd>
+        <dt class="col-sm-2">
+            Start Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Project.StartDate.ToShortDateString()
+        </dd>
+        <dt class="col-sm-2">
+            Due Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Project.EndDate.ToShortDateString()
+        </dd>
+        <dt class="col-sm-2">
+            Progress Status
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.ProgressStatus)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.Location)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Project.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

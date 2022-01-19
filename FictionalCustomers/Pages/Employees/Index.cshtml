@@ -1,0 +1,94 @@
+﻿@page
+@model FictionalCustomers.Pages.Employees.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                First Name
+                @*@Html.DisplayNameFor(model => model.Employee[0].FirstName)*@
+            </th>
+            <th>
+                Last Name
+                @*@Html.DisplayNameFor(model => model.Employee[0].LastName)*@
+            </th>
+            <th>
+                Skill Level
+                @*@Html.DisplayNameFor(model => model.Employee[0].SkillLevel)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Email)
+            </th>
+            <th>
+                Assigned Project/s
+            </th>
+            <th>
+                User Role
+                @*@Html.DisplayNameFor(model => model.Employee[0].UserRole)*@
+            </th>
+            <th>
+                Employment Status
+                @*@Html.DisplayNameFor(model => model.Employee[0].EmploymentStatus)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employee) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @if(item.Projects.Count() == 1)
+                {
+                    @item.Projects.First().ProjectName;
+                }
+                else
+                {
+                    @foreach(var Project in item.Projects)
+                    {
+                        if (Project != item.Projects.Last())
+                        {
+                            @(Project.ProjectName + ", ")
+                        }
+                        else
+                        {
+                            @Project.ProjectName
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmploymentStatus)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

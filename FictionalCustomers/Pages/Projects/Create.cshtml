@@ -1,0 +1,74 @@
+﻿@page
+@model FictionalCustomers.Pages.Projects.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Project.ProjectName" class="control-label">Project Name</label>
+                <input asp-for="Project.ProjectName" class="form-control" />
+                <span asp-validation-for="Project.ProjectName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.ReqSkillLevel" class="control-label">Required Skill Level</label>
+                <input asp-for="Project.ReqSkillLevel" class="form-control" />
+                <span asp-validation-for="Project.ReqSkillLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Description" class="control-label"></label>
+                <input asp-for="Project.Description" class="form-control" />
+                <span asp-validation-for="Project.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.StartDate" class="control-label">Start Date</label>
+                <input asp-for="Project.StartDate" class="form-control" />
+                <span asp-validation-for="Project.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.EndDate" class="control-label">Due Date</label>
+                <input asp-for="Project.EndDate" class="form-control" />
+                <span asp-validation-for="Project.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.ProgressStatus" class="control-label">Progress Status</label>
+                <input asp-for="Project.ProgressStatus" class="form-control" />
+                <span asp-validation-for="Project.ProgressStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Employees" class="control-label">Deploy Employee/s</label>
+                <select asp-for="EmployeeID" class ="form-control" asp-items="ViewBag.EmployeeID"></select>
+                <span asp-validation-for="EmployeeID" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Project.Clients" class="control-label">Client</label>
+                <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+                <span asp-validation-for="ClientID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Location" class="control-label"></label>
+                <input asp-for="Project.Location" class="form-control" />
+                <span asp-validation-for="Project.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
