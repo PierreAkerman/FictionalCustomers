@@ -23,7 +23,9 @@ namespace FictionalCustomers.Pages.Clients
 
         public async Task OnGetAsync()
         {
-            ClientCompany = await _context.ClientCompanies.ToListAsync();
+            ClientCompany = await _context.ClientCompanies
+                .Include(c => c.Projects)
+                .ToListAsync();
         }
     }
 }

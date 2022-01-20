@@ -28,7 +28,9 @@ namespace FictionalCustomers.Pages.Employees
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
+            Employee = await _context.Employees
+                .Include(e => e.Projects)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Employee == null)
             {

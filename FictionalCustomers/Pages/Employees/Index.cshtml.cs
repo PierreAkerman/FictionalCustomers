@@ -23,7 +23,7 @@ namespace FictionalCustomers.Pages.Employees
 
         public async Task OnGetAsync()
         {
-            Employee = await _context.Employees
+            Employee = await _context.Employees.OrderBy(e => e.FirstName)
                 .Include(e => e.Projects).ToListAsync();
         }
     }

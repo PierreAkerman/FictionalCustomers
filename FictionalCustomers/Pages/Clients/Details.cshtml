@@ -8,17 +8,17 @@
 <h1>Details</h1>
 
 <div>
-    <h4>ClientCompany</h4>
+    <h4>@Model.ClientCompany.CompanyName</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientCompany.CompanyName)
+            Company Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ClientCompany.CompanyName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientCompany.ContactPerson)
+            Contact Person
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ClientCompany.ContactPerson)

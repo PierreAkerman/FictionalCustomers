@@ -7,7 +7,7 @@
 
 <h1>Edit</h1>
 
-<h4>Employee</h4>
+<h4>@Model.Employee.FullName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,19 +15,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Employee.Id" />
             <div class="form-group">
-                <label asp-for="Employee.FirstName" class="control-label"></label>
+                <label asp-for="Employee.FirstName" class="control-label">First Name</label>
                 <input asp-for="Employee.FirstName" class="form-control" />
                 <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Employee.LastName" class="control-label"></label>
+                <label asp-for="Employee.LastName" class="control-label">Last Name</label>
                 <input asp-for="Employee.LastName" class="form-control" />
                 <span asp-validation-for="Employee.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Employee.SkillLevel" class="control-label"></label>
+                <label asp-for="Employee.SkillLevel" class="control-label">Skill Level</label>
                 <input asp-for="Employee.SkillLevel" class="form-control" />
                 <span asp-validation-for="Employee.SkillLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Projects" class="control-label">Assign Project/s</label>
+                <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+                <span asp-validation-for="ProjectID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Employee.Email" class="control-label"></label>
@@ -35,12 +40,12 @@
                 <span asp-validation-for="Employee.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Employee.UserRole" class="control-label"></label>
+                <label asp-for="Employee.UserRole" class="control-label">User Role</label>
                 <input asp-for="Employee.UserRole" class="form-control" />
                 <span asp-validation-for="Employee.UserRole" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Employee.EmploymentStatus" class="control-label"></label>
+                <label asp-for="Employee.EmploymentStatus" class="control-label">Employment Status</label>
                 <input asp-for="Employee.EmploymentStatus" class="form-control" />
                 <span asp-validation-for="Employee.EmploymentStatus" class="text-danger"></span>
             </div>

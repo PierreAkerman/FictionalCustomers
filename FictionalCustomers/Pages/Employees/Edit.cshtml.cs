@@ -22,6 +22,8 @@ namespace FictionalCustomers.Pages.Employees
 
         [BindProperty]
         public Employee Employee { get; set; }
+        [BindProperty]
+        public int[] ProjectID { get; set; } = null;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,7 +32,11 @@ namespace FictionalCustomers.Pages.Employees
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
+            Employee = await _context.Employees
+                .Include(e => e.Projects)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "Id", "ProjectName");
 
             if (Employee == null)
             {
@@ -39,8 +45,6 @@ namespace FictionalCustomers.Pages.Employees
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -49,6 +53,15 @@ namespace FictionalCustomers.Pages.Employees
             }
 
             _context.Attach(Employee).State = EntityState.Modified;
+
+            List<Project> Projects_temp = new();
+            foreach (int id in ProjectID)
+            {
+                Project p = _context.Projects.Single(p => p.Id == id);
+                Projects_temp.Add(p);
+            }
+            _context.Entry(Employee).Collection(e => e.Projects).Load();
+            Employee.Projects = Projects_temp;
 
             try
             {

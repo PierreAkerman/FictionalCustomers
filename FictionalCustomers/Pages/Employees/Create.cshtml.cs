@@ -21,18 +21,27 @@ namespace FictionalCustomers.Pages.Employees
 
         public IActionResult OnGet()
         {
+            ViewData["ProjectID"] = new SelectList(_context.Projects, "Id", "ProjectName");
             return Page();
         }
 
         [BindProperty]
         public Employee Employee { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        [BindProperty]
+        public int[] ProjectID { get; set; } = null;
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            foreach (int id in ProjectID)
+            {
+                Project p = _context.Projects.Single(p => p.Id == id);
+                Employee.Projects.Add(p);
             }
 
             _context.Employees.Add(Employee);

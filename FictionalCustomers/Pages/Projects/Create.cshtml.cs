@@ -21,8 +21,8 @@ namespace FictionalCustomers.Pages.Projects
 
         public IActionResult OnGet()
         {
-            ViewData["EmployeeID"] = new SelectList(_context.Employees, "Id", "FullName");
-            ViewData["ClientID"] = new SelectList(_context.ClientCompanies, "Id", "CompanyName");
+            ViewData["EmployeeID"] = new SelectList(_context.Employees.OrderBy(e => e.FirstName), "Id", "FullName");
+            ViewData["ClientID"] = new SelectList(_context.ClientCompanies.OrderBy(c => c.CompanyName), "Id", "CompanyName");
             return Page();
         }
 
@@ -40,14 +40,12 @@ namespace FictionalCustomers.Pages.Projects
                 return Page();
             }
 
-            List<Employee> Employee_temp = new();
             foreach (int id in EmployeeID)
             {
                 Employee e = _context.Employees.Single(e => e.Id == id);
                 Project.Employees.Add(e);
             }
 
-            List<ClientCompany> Client_temp = new();
             foreach (int id in ClientID)
             {
                 ClientCompany c = _context.ClientCompanies.Single(c => c.Id == id);

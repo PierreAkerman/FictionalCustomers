@@ -29,6 +29,11 @@
                 <span asp-validation-for="Employee.SkillLevel" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Employee.Projects" class="control-label">Assign Project/s</label>
+                <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+                <span asp-validation-for="ProjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Employee.Email" class="control-label"></label>
                 <input asp-for="Employee.Email" class="form-control" />
                 <span asp-validation-for="Employee.Email" class="text-danger"></span>

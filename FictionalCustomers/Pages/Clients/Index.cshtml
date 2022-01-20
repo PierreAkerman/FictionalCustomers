@@ -14,10 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ClientCompany[0].CompanyName)
+                Company Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientCompany[0].ContactPerson)
+                Project/s
+            </th>
+            <th>
+                Contact Person
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ClientCompany[0].Email)
@@ -31,6 +34,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyName)
             </td>
+
+            <td>
+                    @if(item.Projects.Count() == 1)
+                    {
+                        @item.Projects.First().ProjectName
+                        ;
+                    }
+                    else
+                    {
+                        @foreach(var Project in item.Projects)
+                        {
+                            if(Project != item.Projects.Last())
+                            {
+                                @(Project.ProjectName + ", ")
+                            }
+                            else
+                            {
+                                @Project.ProjectName
+                            }
+                        }
+                    }
+
+
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.ContactPerson)
             </td>

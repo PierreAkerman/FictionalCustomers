@@ -8,23 +8,23 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Employee</h4>
+    <h4>@Model.Employee.FullName</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            First Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Employee.FirstName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Employee.LastName)
+            Last Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Employee.LastName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Employee.SkillLevel)
+            Skill Level
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Employee.SkillLevel)
@@ -36,13 +36,36 @@
             @Html.DisplayFor(model => model.Employee.Email)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Employee.UserRole)
+            Assigned Project/s
+        </dt>
+        <dd class="col-sm-10">
+                @if(Model.Employee.Projects.Count() == 1)
+                {
+                    @Model.Employee.Projects.First().ProjectName
+                }
+                else
+                    {
+                    @foreach(var Project in Model.Employee.Projects)
+                    {
+                        if (Project != Model.Employee.Projects.Last())
+                        {
+                            @(Project.ProjectName + ", ")
+                        }
+                        else
+                        {
+                            @Project.ProjectName
+                        }
+                    }
+                }
+        </dd>
+        <dt class="col-sm-2">
+            User Role
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Employee.UserRole)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Employee.EmploymentStatus)
+            Employment Status
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Employee.EmploymentStatus)

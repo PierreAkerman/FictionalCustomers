@@ -7,19 +7,19 @@
 
 <h1>Create</h1>
 
-<h4>ClientCompany</h4>
+<h4>Client Company</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ClientCompany.CompanyName" class="control-label"></label>
+                <label asp-for="ClientCompany.CompanyName" class="control-label">Company Name</label>
                 <input asp-for="ClientCompany.CompanyName" class="form-control" />
                 <span asp-validation-for="ClientCompany.CompanyName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientCompany.ContactPerson" class="control-label"></label>
+                <label asp-for="ClientCompany.ContactPerson" class="control-label">Contact Person</label>
                 <input asp-for="ClientCompany.ContactPerson" class="form-control" />
                 <span asp-validation-for="ClientCompany.ContactPerson" class="text-danger"></span>
             </div>

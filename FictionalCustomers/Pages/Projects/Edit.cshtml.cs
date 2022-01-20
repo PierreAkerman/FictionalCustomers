@@ -24,7 +24,8 @@ namespace FictionalCustomers.Pages.Projects
         public Project Project { get; set; }
         [BindProperty]
         public int[] EmployeeID { get; set; }
-
+        [BindProperty]
+        public int[] ClientID { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -34,9 +35,11 @@ namespace FictionalCustomers.Pages.Projects
 
             Project = await _context.Projects
                 .Include(p => p.Employees)
+                .Include(p => p.Clients)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            ViewData["EmployeeID"] = new SelectList(_context.Employees, "Id", "FullName");
+            ViewData["EmployeeID"] = new SelectList(_context.Employees.OrderBy(e => e.FirstName), "Id", "FullName");
+            ViewData["ClientID"] = new SelectList(_context.ClientCompanies.OrderBy(c => c.CompanyName), "Id", "CompanyName");
 
             if (Project == null)
             {
@@ -45,8 +48,6 @@ namespace FictionalCustomers.Pages.Projects
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -62,10 +63,18 @@ namespace FictionalCustomers.Pages.Projects
                 Employee e = _context.Employees.Single(e => e.Id == id);
                 Employees_temp.Add(e);
             }
-
             _context.Entry(Project).Collection(c => c.Employees).Load();
-            Project.Employees = Employees_temp;
 
+            List<ClientCompany> Clients_temp = new();
+            foreach (int id in ClientID)
+            {
+                ClientCompany c = _context.ClientCompanies.Single(c => c.Id == id);
+                Clients_temp.Add(c);
+            }
+            _context.Entry(Project).Collection(c =>c.Clients).Load();
+
+            Project.Employees = Employees_temp;
+            Project.Clients = Clients_temp;
 
             try
             {
