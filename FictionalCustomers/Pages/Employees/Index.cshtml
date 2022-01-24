@@ -25,9 +25,9 @@
                 Skill Level
                 @*@Html.DisplayNameFor(model => model.Employee[0].SkillLevel)*@
             </th>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Email)
-            </th>
+            </th>*@
             <th>
                 Assigned Project/s
             </th>
@@ -54,9 +54,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SkillLevel)
             </td>
-            <td>
+@*            <td>
                 @Html.DisplayFor(modelItem => item.Email)
-            </td>
+            </td>*@
             <td>
                 @if(item.Projects.Count() == 1)
                 {

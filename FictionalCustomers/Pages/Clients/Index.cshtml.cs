@@ -23,7 +23,7 @@ namespace FictionalCustomers.Pages.Clients
 
         public async Task OnGetAsync()
         {
-            ClientCompany = await _context.ClientCompanies
+            ClientCompany = await _context.ClientCompanies.OrderBy(c =>c.CompanyName)
                 .Include(c => c.Projects)
                 .ToListAsync();
         }
